@@ -1,6 +1,7 @@
 # python-ultimate-guide
 Python language concepts guide
 
+## Multitasking
 
 - [x] **GIL, Multiprocessing, Threading, Asyncio**
 - https://realpython.com/python-gil/
@@ -17,6 +18,8 @@ thread.start() thread.join()
 
 async io: event loop (uvloop), Asyncio.run(), Async with, async for
 
+## Memory and GC
+
 - [x] **Garbage collection, 3 generations, weakref**
 - https://stackify.com/python-garbage-collection/
 - https://devguide.python.org/garbage_collector/
@@ -31,6 +34,43 @@ reference cycle, gen gc (generations, threshold), gc module (1gen -> 2gen -> 3ge
 Arenas: 256kb, double linked list of usable_arenas (sorted by number of free pools available, the most data closer). Only arenas can truly free memory  
 Pools: 4kb, dbl linked list to pools with same size class: usedpools (contain data), freepools, full pools  
 Blocks: linked list - all the same size within pool: untouched, free, allocated  
+
+## Classes and OOP
+
+- [x] **Duck Typing** https://machinelearningmastery.com/duck-typing-python/
+
+- [x] **Multiple inheritance, MRO, __mro__, Mixin** https://realpython.com/python-super/
+
+- [x] **Metaclass** https://realpython.com/python-metaclasses/  
+Inherit ‘type’ in Meta + class Bar(metaclass=Meta) __new__  __init__
+
+- [x] **Virtual classes, implementing interfaces, __subclasshook()__**
+- https://realpython.com/python-interface/
+- https://www.demo2s.com/python/python-virtual-subclasses.html
+- https://medium.com/analytics-vidhya/abc-in-python-abstract-base-class-35808a9d6b32
+
+ABC.register() make virtual class (not inherited but becomes issubclass()) doesn’t appear in MRO and can’t call super()  
+_abc_registry - attr in ABC: weakset containing registered virtual classes of current abstract class  
+ABC.register() cancels __subclasshook__
+
+- [x] **Data Classes** https://realpython.com/python-data-classes/  
+@dataclass(order, frozen) decorator  
+implement __repr__ and __eq__  
+field(default_factory=func())  
+__slots__
+
+- [x] **Descriptors** https://realpython.com/python-descriptors/  
+Descriptor protocol (__get__ __set__ __delete__ __set_name__)  
+Lookup chain: data descriptor -> obj.__dict__ -> non-data descriptor -> type(obj).__dict__ -> parent.type(obj).__dict__ -> MRO
+
+
+## Scopes, functions, variables
+
+- [x] **Functions considered first class objects** https://dbader.org/blog/python-first-class-functions
+
+- [x] **PyObjects** https://realpython.com/pointers-in-python/  
+Names instead of variables -> PyObject (C struct) {Type, Value, RefCount}, CPython interns (preallocates) numbers between -5 and 256 and strings < 20 chars  
+Can emulate pointers with mutable type (dict, list, set)  
 
 - [x] **Lambda, closure** https://realpython.com/python-lambda/
 
@@ -56,44 +96,16 @@ coroutine - generator function into which you can pass data
 As of Python 3.6, for the CPython implementation of Python, dictionaries remember the order of items inserted. This is considered an implementation detail in Python 3.6;  
 As of Python 3.7, this is a guaranteed language feature, not merely an implementation detail.  
 
-- [x] **New python 3.10 lang features** https://realpython.com/python310-new-features/
 
-friendlier error messages  
-structural pattern matching  
-type hint improvements (unioin with | list[float | int], TypeAlias, TypeGuards  
-zip strict param (matching lists are equal)  
-new funcs in statistics module  
-modern SSL  
-	
-- [x] **Virtual classes, implementing interfaces, __subclasshook()__**
-- https://realpython.com/python-interface/
-- https://www.demo2s.com/python/python-virtual-subclasses.html
-- https://medium.com/analytics-vidhya/abc-in-python-abstract-base-class-35808a9d6b32
-
-ABC.register() make virtual class (not inherited but becomes issubclass()) doesn’t appear in MRO and can’t call super()  
-_abc_registry - attr in ABC: weakset containing registered virtual classes of current abstract class  
-ABC.register() cancels __subclasshook__
-
-- [x] **Descriptors** https://realpython.com/python-descriptors/  
-Descriptor protocol (__get__ __set__ __delete__ __set_name__)  
-Lookup chain: data descriptor -> obj.__dict__ -> non-data descriptor -> type(obj).__dict__ -> parent.type(obj).__dict__ -> MRO
+## Other
 
 - [x] **Functools** https://docs.python.org/3/library/functools.html
-
-- [x] **Metaclass** https://realpython.com/python-metaclasses/  
-Inherit ‘type’ in Meta + class Bar(metaclass=Meta) __new__  __init__
 	
 - [x] **Imports absolute vs relative** https://realpython.com/absolute-vs-relative-python-imports/
 
 - [x] **Data Structures** https://realpython.com/python-data-structures
 
 - [x] **Compilation and linking in Python** http://net-informations.com/python/iq/linking.htm
-
-- [x] **Data Classes** https://realpython.com/python-data-classes/  
-@dataclass(order, frozen) decorator  
-implement __repr__ and __eq__  
-field(default_factory=func())  
-__slots__
 
 - [x] **Decorators, Class decorators** https://realpython.com/primer-on-python-decorators/  
 @functools.wraps decorator will preserve information about the original function  
@@ -106,30 +118,30 @@ Example of non-trivial class decorator (register class as virtual class):
 - [x] **Context managers** https://www.geeksforgeeks.org/context-manager-in-python/  
 __enter()__ __exit()__
 
-- [x] **Functions considered first class objects** https://dbader.org/blog/python-first-class-functions
-
-- [x] **PyObjects** https://realpython.com/pointers-in-python/  
-Names instead of variables -> PyObject (C struct) {Type, Value, RefCount}, CPython interns (preallocates) numbers between -5 and 256 and strings < 20 chars  
-Can emulate pointers with mutable type (dict, list, set)  
-
 - [x] **List and Dict comprehensions** https://realpython.com/list-comprehension-python/  
 Gen comprehensions:  
 nums_squared_lc = [num**2 for num in range(5)]  
 nums_squared_gc = (num**2 for num in range(5))  
 list compr faster but gen compr memory efficient  
 
-- [x] **Multiple inheritance, MRO, __mro__, Mixin** https://realpython.com/python-super/
-
 - [x] **args, kwargs, unpacking operators** https://realpython.com/python-kwargs-and-args/
-
-- [x] **Duck Typing** https://machinelearningmastery.com/duck-typing-python/
 
 - [x] **Copy vs deepcopy** https://realpython.com/copying-python-objects/
 
 
+## New Python Features
+
+- [x] **New python 3.10 lang features** https://realpython.com/python310-new-features/
+
+friendlier error messages  
+structural pattern matching  
+type hint improvements (unioin with | list[float | int], TypeAlias, TypeGuards  
+zip strict param (matching lists are equal)  
+new funcs in statistics module  
+modern SSL  
 
 
-**Tools:**
+## Tools 
 
 Pympler is a development tool to measure, monitor and analyze the memory behavior of Python objects in a running Python application.  
 https://pythonhosted.org/Pympler/  
