@@ -120,7 +120,7 @@ list compr faster but gen compr memory efficient
 
 - [x] **Multiple inheritance, MRO, __mro__, Mixin** https://realpython.com/python-super/
 
-- [x] ***args, **kwargs, unpacking operators** https://realpython.com/python-kwargs-and-args/
+- [x] **args, kwargs, unpacking operators** https://realpython.com/python-kwargs-and-args/
 
 - [x] **Duck Typing** https://machinelearningmastery.com/duck-typing-python/
 
